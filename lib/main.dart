@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const InternetScreen(),
         // '/home': (context) => const PaymentSuccses(),
         '/paymentSuccess': (context) => const PaymentSuccses(),
-        // '/transactionHistory': (context) => const TransactionHistoryScreen(),
+        '/transactionHistory': (context) => const TransactionHistoryScreen(),
       },
     );
   }

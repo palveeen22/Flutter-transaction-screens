@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class InternetScreen extends StatefulWidget {
   const InternetScreen({Key? key}) : super(key: key);
@@ -155,6 +156,7 @@ class _InternetScreenState extends State<InternetScreen> {
               ),
             ),
           ),
+          details(context),
           buildBottomContainer(context),
         ],
       ),
@@ -223,13 +225,6 @@ class _InternetScreenState extends State<InternetScreen> {
           ),
           Divider(color: Colors.grey[300]),
           if (showDetail)
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8.0),
-            //   child: Text(
-            //     'Additional details about the transaction.',
-            //     style: TextStyle(color: Color(0xFF838799)),
-            //   ),
-            // ),
             Container(
               width: double.infinity,
               height: 128,
@@ -345,6 +340,49 @@ class _InternetScreenState extends State<InternetScreen> {
             child: Text(
               showDetail ? 'Close' : 'See Details',
               style: TextStyle(color: Color(0xFFE12029)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget details(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+      width: 424,
+      height: 64,
+      decoration: BoxDecoration(
+        color: Colors.white, // Use your desired color
+        borderRadius: BorderRadius.circular(0),
+        border: Border.all(color: Colors.grey), // Add border if needed
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+            child: Text(
+              'Transaction History',
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                color: Color(0xFF3E414C),
+                fontSize: 16,
+                letterSpacing: 0,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/transactionHistory');
+              },
+              icon: Icon(
+                Icons.arrow_forward_ios_outlined,
+                color: Color(0xFF1C1B1F),
+                size: 20,
+              ),
             ),
           ),
         ],
