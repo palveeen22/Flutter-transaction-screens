@@ -1,4 +1,4 @@
-# test_yipy
+# Internet check-out payment screens 
 
 A new Flutter project.
 
