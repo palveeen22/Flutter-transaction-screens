@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class InternetScreen extends StatefulWidget {
   const InternetScreen({Key? key}) : super(key: key);
@@ -54,9 +53,9 @@ class _InternetScreenState extends State<InternetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new, color: Color(0xFF3E414C)),
@@ -73,92 +72,96 @@ class _InternetScreenState extends State<InternetScreen> {
         centerTitle: true,
         elevation: 2,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFF5E6),
-                        border: Border.all(color: Color(0xFFF3CC46), width: 2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.info_outline, color: Color(0xFFF3CC46)),
-                          SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'Perlu diketahui, proses verifikasi transaksi dapat memakan waktu hingga 1x24 jam.',
-                              style: TextStyle(
-                                color: Color(0xFF3E414C),
-                                fontSize: 12,
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFF5E6),
+                          border:
+                              Border.all(color: Color(0xFFF3CC46), width: 2),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline, color: Color(0xFFF3CC46)),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                'Perlu diketahui, proses verifikasi transaksi dapat memakan waktu hingga 1x24 jam.',
+                                style: TextStyle(
+                                  color: Color(0xFF3E414C),
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Choose All',
+                            style: TextStyle(
+                              color: Color(0xFF3E414C),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Checkbox(
+                            value: checkboxValue1,
+                            onChanged: _onChooseAllChanged,
+                            activeColor: Color(0xFFE12029),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Choose All',
-                          style: TextStyle(
-                            color: Color(0xFF3E414C),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Checkbox(
-                          value: checkboxValue1,
-                          onChanged: _onChooseAllChanged,
-                          activeColor: Color(0xFFE12029),
-                        ),
-                      ],
-                    ),
-                    buildCard(
-                      context,
-                      'Rp450.000',
-                      'Due date on 16 Feb 2024',
-                      checkboxValue2,
-                      (newValue) => _onCardCheckboxChanged(newValue, 2),
-                      showDetail1,
-                      () {
-                        setState(() {
-                          showDetail1 = !showDetail1;
-                        });
-                      },
-                    ),
-                    buildCard(
-                      context,
-                      'Rp450.000',
-                      'Due date on 16 Feb 2024',
-                      checkboxValue3,
-                      (newValue) => _onCardCheckboxChanged(newValue, 3),
-                      showDetail2,
-                      () {
-                        setState(() {
-                          showDetail2 = !showDetail2;
-                        });
-                      },
-                    ),
-                  ],
+                      buildCard(
+                        context,
+                        'Rp450.000',
+                        'Due date on 16 Feb 2024',
+                        checkboxValue2,
+                        (newValue) => _onCardCheckboxChanged(newValue, 2),
+                        showDetail1,
+                        () {
+                          setState(() {
+                            showDetail1 = !showDetail1;
+                          });
+                        },
+                      ),
+                      buildCard(
+                        context,
+                        'Rp450.000',
+                        'Due date on 16 Feb 2024',
+                        checkboxValue3,
+                        (newValue) => _onCardCheckboxChanged(newValue, 3),
+                        showDetail2,
+                        () {
+                          setState(() {
+                            showDetail2 = !showDetail2;
+                          });
+                        },
+                      ),
+                      details(context),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          details(context),
-          buildBottomContainer(context),
-        ],
+            buildBottomContainer(context),
+          ],
+        ),
       ),
     );
   }
@@ -176,6 +179,7 @@ class _InternetScreenState extends State<InternetScreen> {
       margin: EdgeInsets.only(bottom: 15),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: Colors.grey[300]!, width: 1),
       ),
@@ -225,113 +229,113 @@ class _InternetScreenState extends State<InternetScreen> {
           ),
           Divider(color: Colors.grey[300]),
           if (showDetail)
-            Container(
-              width: double.infinity,
-              height: 128,
-              constraints: BoxConstraints(
-                maxWidth: 430,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Provider',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+            SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                constraints: BoxConstraints(maxWidth: 430),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Provider',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Nethome',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+                                Text(
+                                  'Nethome',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'ID Pelanggan',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'ID Pelanggan',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '1123645718921',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+                                Text(
+                                  '1123645718921',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Paket Layanan',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Paket Layanan',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'Nethome 100 Mbps',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  color: Color(0xFF3E414C),
-                                  fontSize: 14,
-                                  letterSpacing: 0,
+                                Text(
+                                  'Nethome 100 Mbps',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    color: Color(0xFF3E414C),
+                                    fontSize: 14,
+                                    letterSpacing: 0,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Divider(color: Colors.grey[300]),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -349,40 +353,29 @@ class _InternetScreenState extends State<InternetScreen> {
 
   Widget details(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-      width: 424,
-      height: 64,
-      decoration: BoxDecoration(
-        color: Colors.white, // Use your desired color
-        borderRadius: BorderRadius.circular(0),
-        border: Border.all(color: Colors.grey), // Add border if needed
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      width: double.infinity,
+      color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-            child: Text(
-              'Transaction History',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                color: Color(0xFF3E414C),
-                fontSize: 16,
-                letterSpacing: 0,
-              ),
+          Text(
+            'Transaction History',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              color: Color(0xFF3E414C),
+              fontSize: 16,
+              letterSpacing: 0,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/transactionHistory');
-              },
-              icon: Icon(
-                Icons.arrow_forward_ios_outlined,
-                color: Color(0xFF1C1B1F),
-                size: 20,
-              ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/transactionHistory');
+            },
+            icon: Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Color(0xFF1C1B1F),
+              size: 20,
             ),
           ),
         ],
@@ -392,8 +385,8 @@ class _InternetScreenState extends State<InternetScreen> {
 
   Widget buildBottomContainer(BuildContext context) {
     return Container(
-      // color: Colors.grey[200],
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -443,15 +436,16 @@ class _InternetScreenState extends State<InternetScreen> {
               ),
             ),
             child: Center(
-                child: Text(
-              'PAY NOW',
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+              child: Text(
+                'PAY NOW',
+                style: TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            )),
+            ),
           ),
         ],
       ),
